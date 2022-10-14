@@ -20,7 +20,7 @@ export class ReactiveComponent implements OnInit, OnDestroy {
     { name: "Jet", value: 'jet' }
   ];
   // In case the checkboxes have default values
-  defaultValues = ['car', 'jet'];
+  // defaultValues = ['car', 'jet'];
 
   get skillArray() {
     return this.reactiveForm.get('skills') as FormArray;
@@ -38,6 +38,21 @@ export class ReactiveComponent implements OnInit, OnDestroy {
 
   get checkboxFArray() {
     return this.reactiveForm.get('vehicles') as FormArray;
+  }
+
+  addDefault() {
+    this.reactiveForm.setValue({
+      personalDetails: {
+        firstname: 'Sachin',
+        lastname: 'Varghese'
+      },
+      gender: 'Male',
+      course: 'MBA',
+      address: 'Adoor',
+      email: 'abc@gmail.com',
+      vehicles: [true, false, false],
+      skills: ['CSS']
+    })
   }
 
   constructor(private fb: FormBuilder) { }
@@ -85,12 +100,15 @@ export class ReactiveComponent implements OnInit, OnDestroy {
         lastname: this.fb.control(null, [Validators.required, this.noSpaceAllowed]),
       }),
       course: this.fb.control(null, [Validators.required]),
-      gender: this.fb.control('Male', [Validators.required]),
+      gender: this.fb.control(null, [Validators.required]),
       address: this.fb.control(null, [Validators.required]),
       email: this.fb.control(null, [Validators.required, Validators.email], this.emailNotAllowed),
       vehicles: this.fb.array(this.checkboxes.map(x => {
-        if (this.defaultValues.includes(x.value)) { return x.value }
-        else { return false }
+        //?------if yousing default value array----------
+        // if (this.defaultValues.includes(x.value)) { return x.value }
+        // else { return false }
+        //?---------------------------------------------------
+        return false;
       })),
       skills: this.fb.array([
         new FormControl(null, [Validators.required]),
@@ -115,11 +133,9 @@ export class ReactiveComponent implements OnInit, OnDestroy {
     // })
     this.statusSub = this.reactiveForm.statusChanges.subscribe({
       next: (val) => {
-        console.log(val);
         this.formStatus = val;
       }
     })
-
 
   }
 }

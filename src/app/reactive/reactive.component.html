@@ -89,13 +89,19 @@
             <button (click)="addSkills()">Add Skills</button>
         </div>
 
+        <div>
+            <button (click)="addDefault()">Default Value</button>
+        </div>
+
         <!-- <label for="psw"><b>Password</b></label>
         <input type="password" placeholder="Enter Password" name="psw" required>
 
         <label for="psw-repeat"><b>Re-type Password</b></label>
         <input type="password" placeholder="Retype Password" name="psw-repeat" required> -->
         <br>
-        <div *ngIf="formStatus">
+
+        <!-- <div *ngIf="formStatus"> -->
+        <div [ngStyle]="{'visibility': formStatus ? 'visible':'hidden' }">
             <h3>Form is validity: <span class="status" [ngClass]="formStatus">{{formStatus | titlecase}}</span>
             </h3>
         </div>
