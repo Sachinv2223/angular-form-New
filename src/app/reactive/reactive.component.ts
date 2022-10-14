@@ -10,7 +10,9 @@ import { Observable, Subscription } from 'rxjs';
 export class ReactiveComponent implements OnInit, OnDestroy {
 
   reactiveForm!: FormGroup;
-  subscription: Subscription = new Subscription;
+  checkboxSub: Subscription = new Subscription;
+  statusSub: Subscription = new Subscription;
+  formStatus: any;
 
   checkboxes: { name: string, value: string }[] = [
     { name: 'Bike', value: 'bike' },
@@ -41,7 +43,8 @@ export class ReactiveComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder) { }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.statusSub.unsubscribe();
+    this.checkboxSub.unsubscribe();
   }
 
   noSpaceAllowed(control: FormControl) {
@@ -64,7 +67,7 @@ export class ReactiveComponent implements OnInit, OnDestroy {
         else {
           resolve(null);
         }
-      }, 200);
+      }, 4000);
     });
     return response;
   }
@@ -94,12 +97,28 @@ export class ReactiveComponent implements OnInit, OnDestroy {
       ])
     }, this.groupOptions);
 
-    this.subscription = this.checkboxFArray.valueChanges.subscribe(_checkbox => {
-      this.checkboxFArray.setValue(
-        this.checkboxFArray.value.map((value: any, i: number) => value ? this.checkboxes[i].value : false),
-        { emitEvent: false }
-      );
+    //? for checkbox to work properly
+    this.checkboxSub = this.checkboxFArray.valueChanges.subscribe({
+      next: (_checkbox) => {
+        // console.log(_checkbox);
+        this.checkboxFArray.setValue(
+          this.checkboxFArray.value.map((value: any, i: number) => value ? this.checkboxes[i].value : false),
+          { emitEvent: false });
+      }
     });
+
+    //? for learning about valueChanges and statusChanges
+    // this.statusSub = this.reactiveForm.get('personalDetails.firstname')?.valueChanges.subscribe({
+    //   next: (val) => {
+    //     console.log(val);
+    //   }
+    // })
+    this.statusSub = this.reactiveForm.statusChanges.subscribe({
+      next: (val) => {
+        console.log(val);
+        this.formStatus = val;
+      }
+    })
 
 
   }

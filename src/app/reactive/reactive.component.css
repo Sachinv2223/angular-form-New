@@ -76,14 +76,18 @@ input.ng-invalid.ng-touched {
     border: red 1px solid;
 }
 
-.true {
+small {
+    color: red;
+}
+
+.status.INVALID {
+    color: red;
+}
+
+.status.VALID {
     color: green;
 }
 
-.false {
-    color: red;
-}
-
-small {
-    color: red;
+.status.PENDING {
+    color: yellow;
 }

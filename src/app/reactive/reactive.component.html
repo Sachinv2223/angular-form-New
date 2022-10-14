@@ -95,10 +95,10 @@
         <label for="psw-repeat"><b>Re-type Password</b></label>
         <input type="password" placeholder="Retype Password" name="psw-repeat" required> -->
         <br>
-        <h3>Form is validity: <span
-                [ngClass]="{'true': reactiveForm.valid,'false': reactiveForm.invalid }">{{reactiveForm.valid.toString()
-                | uppercase}}</span>
-        </h3>
+        <div *ngIf="formStatus">
+            <h3>Form is validity: <span class="status" [ngClass]="formStatus">{{formStatus | titlecase}}</span>
+            </h3>
+        </div>
         <br><br>
         <button type="submit" class="registerbtn">Register</button>
     </div>
