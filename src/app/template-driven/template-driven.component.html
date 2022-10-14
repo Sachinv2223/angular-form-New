@@ -1,0 +1,83 @@
+<div class="head">
+  <h1 style="margin-top: 0; margin-bottom: 16px; padding: 12px;">Membership</h1>
+</div>
+
+<div class="content">
+  <h2 style="text-align: center;">Registration form</h2>
+
+
+  <form (ngSubmit)="onSubmit()" #myForm="ngForm">
+
+    <div ngModelGroup="studentDetails">
+      <b>Student name</b><br>
+      <input type="text" name="sname" placeholder="Student name" [(ngModel)]="studentName" required #sname="ngModel">
+      &nbsp;
+      <small *ngIf="sname.invalid && sname.touched">Name is required</small>
+      <small *ngIf="studentName">You entered {{studentName}}</small>
+      <br> <br>
+      <b>Email Address</b><br>
+      <input type="email" name="saddress" placeholder="Student email" [(ngModel)]="studentAddress" required email
+        #saddress="ngModel"> &nbsp;
+      <small *ngIf="saddress.invalid && saddress.touched">Email is required</small>
+      <small *ngIf="studentAddress">You entered {{studentAddress}}</small>
+      <br> <br>
+      <input type="button" class="btn" name="Default" value="Set Default" (click)="setDefault()">
+      <br> <br>
+    </div>
+
+    <b>Gender :</b>
+    <span *ngFor="let gen of studentGender">
+      <input type="radio" [id]="gen.id" name="sgender" [value]="gen.value" [(ngModel)]="defaultGender">
+      <label for="{{gen.id}}">{{gen.value}}</label> &nbsp;
+    </span>
+    <br><br>
+
+    <b>Department: </b>
+    <select name="sdept" [(ngModel)]="defaultDepartment" required #sdept="ngModel">
+      <option value="" disabled selected hidden>Select department..</option>
+      <option value="First Year">First Year</option>
+      <option value="Computer">Computer</option>
+      <option value="Mechanical">Mechanical</option>
+      <option value="Electronics">Electronics</option>
+      <option value="Instrumentation">Instrumentation</option>
+      <option value="Information Technology">Information Technology</option>
+    </select>
+    &nbsp;
+    <b>Year: </b>
+    <select name="syear" [(ngModel)]="studentYear" required #syear="ngModel">
+      <option value="" disabled selected hidden>Select year...</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+    </select>
+    <br><br>
+
+    <b>Interested Post:</b><br>
+    <span *ngFor="let post of studentPost, let i = index">
+      <input type="checkbox" name="spost" [value]="post.value" [(ngModel)]="post.default">
+      {{post.value}}
+    </span>
+    <!-- <input type="checkbox" name="spost" value='E Manager' [(ngModel)]="defaultPost[0]">Event manager
+      <input type="checkbox" name="spost" value='JE Manager' [(ngModel)]="defaultPost[1]">Joint event manager
+      <input type="checkbox" name="spost" value='S Manager' [(ngModel)]="defaultPost[2]">Sports secretary
+      <input type="checkbox" name="spost" value='D Committee' [(ngModel)]="defaultPost[3]">Discpline Committee -->
+    <br><br>
+
+
+    <input type="submit" class="btn" name="submit" value="Submit">
+    <!--[disabled]="myForm.invalid"-->
+    &nbsp;
+    <input type="reset" name="reset" value="Reset" (click)="reset()">
+  </form>
+</div>
+
+
+<div class="form-data content" style="margin-top: 20px; text-align: center;">
+  <h2>Form Data</h2>
+  <p>Student Name: {{studentName}}</p>
+  <p>Student Email: {{studentAddress}}</p>
+  <p>Gender: {{gender}}</p>
+  <p>Department: {{studentDepartment}}</p>
+  <p>Year: {{studentYear}}</p>
+</div>

@@ -1,0 +1,110 @@
+.head {
+    position: sticky;
+    top: 0;
+    margin: 0;
+    text-align: center;
+    background-color: #3232CD;
+    width: 100%;
+    color: white;
+}
+
+.content {
+    padding: 18px;
+    margin: auto;
+    top: 100px;
+    left: 372px;
+    width: 450px;
+    border: 2px solid #2E37FE;
+    border-radius: 25px;
+    box-shadow: 3px 5px blue;
+    background-color: white;
+}
+
+font {
+    font-size: 24px;
+    color: #2E37FE;
+}
+
+form {
+    font-size: 18px;
+}
+
+.content input[type="text"],
+.content input[type="email"] {
+    height: 30px;
+    width: 450px;
+    box-sizing: border-box;
+    border: 1px solid #2E37FE;
+    border-radius: 25px;
+    font-size: 16px;
+    padding-left: 10px;
+    width: 50%;
+}
+
+.content input::placeholder {
+    color: #CCC;
+    font-size: 18px;
+}
+
+textarea {
+    font-size: 16px;
+    width: 440px;
+}
+
+select {
+    width: 140px;
+    height: 25px;
+}
+
+.content input[type="submit"],
+.content input[type="button"] {
+    font-size: 20px;
+    text-align: center;
+    float: center;
+    padding: 8px;
+    width: 120px;
+    border: 1px solid blue;
+    border-radius: 20px;
+    background-color: white;
+    color: #2E37FE;
+    cursor: pointer;
+}
+
+.content input[type="reset"] {
+    font-size: 20px;
+    text-align: center;
+    float: center;
+    padding: 8px;
+    border: 8px;
+    width: 120px;
+    border: 1px solid blue;
+    border-radius: 20px;
+    background-color: white;
+    color: #2E37FE;
+    cursor: pointer;
+}
+
+.content input[type="submit"]:hover,
+.content input[type="button"]:hover {
+    color: white;
+    background-color: #2E37FE;
+}
+
+.content input[type="reset"]:hover {
+    color: white;
+    background-color: #2E37FE;
+}
+
+.content input[type="submit"]:disabled {
+    color: gray;
+    background-color: white;
+}
+
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+    border: 1px solid red !important;
+}
+
+small {
+    color: red;
+}
